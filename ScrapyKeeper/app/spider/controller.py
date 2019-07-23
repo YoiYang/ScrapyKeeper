@@ -798,7 +798,7 @@ def project_stats(project_id, spider_id):
             min_items_count = 0
             max_items_count = 100
             average_items_count = 50
-        else :
+        else:
             items_not_null = []
             for i in old_items_count :
                 if i != 0 :
@@ -807,6 +807,9 @@ def project_stats(project_id, spider_id):
             min_items_count = min(items_not_null)
             if len(old_items_count) == 0 : max_items_count = last_items_count
             else : max_items_count = max(old_items_count)
+            # division by zero
+            max_items_count = 1 if max_items_count == 0 else max_items_count
+
             average_items_count = sum(items_not_null) / len(items_not_null)
             if (min_items_count / max_items_count) > 0.8 :
                 min_items_count = max_items_count * 0.8
